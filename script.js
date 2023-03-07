@@ -20,7 +20,7 @@ The game needs to generate a random computer choice, it needs to let the user in
     Make it case insensitive
     let rock = Rock
         paper = Paper
-        sicssors = Scissors
+        scissors = Scissors
 4. get pcs choice
     let pcChoice = randNum from 1-3.
     let 1 = Rock
@@ -76,6 +76,13 @@ let pcChoice = "";
     console.log(pcChoice);
 **/
 
+// Generate pc Choice
+
+let pcScore = 0
+let playerScore = 0
+let rounds = 0
+
+for (let rounds = 0; rounds < 5;) {
 
 const randNum = Math.floor(Math.random() * 3) + 1;
 let pcChoice = "";
@@ -97,28 +104,57 @@ console.log(getComputerChoice(randNum))
 
 console.log(pcChoice);
 
-const playerChoice = prompt("Rock, Paper, or scissors?:").toLowerCase()
+//Generate Player Choice
+const playerChoice = prompt("Rock, Paper, or Scissors?:").toLowerCase()
 
 console.log(playerChoice);
 
-let pcScore = "0"
-let playerScore = "0"
-let rounds = "0"
+//Play round
+
 
 
     function compare(playerChoice, pcChoice) {
     if (playerChoice == "rock" && pcChoice == "Rock" || playerChoice == "paper" && pcChoice == "Paper" || playerChoice == "scissors" && pcChoice == "Scissors") { 
-        console.log("Tie");
+        console.log("It's a tie!");
+        alert("It's a tie!");
         rounds++;
-    } else if (playerChoice == "rock" && pcChoice == "Scissors" || playerChoice == "paper" && pcChoice == "Rock" || playerChoice == "scissors" && pcChoice == "Rock") {
-        console.log(`PLayer wins, ${playerChoice} beats ${pcChoice}`);
+    } else if (playerChoice == "rock" && pcChoice == "Scissors" || playerChoice == "paper" && pcChoice == "Rock" || playerChoice == "scissors" && pcChoice == "Paper") {
+        console.log(`You win! ${playerChoice} beats ${pcChoice}`);
+        alert(`You win! ${playerChoice} beats ${pcChoice}`);
         rounds++;
-    } else if (playerChoice == "rock" && pcChoice == "Paper" || playerChoice == "paper" && pcChoice == "Scissors" || playerChoice == "scissors" && pcChoice == "Rock") { l
-        console.log(`Computer wins, ${pcChoice} beats ${playerChoice}`);
+        return(playerScore += 1);
+    } else if (playerChoice == "rock" && pcChoice == "Paper" || playerChoice == "paper" && pcChoice == "Scissors" || playerChoice == "scissors" && pcChoice == "Rock") {
+        console.log(`You lose! ${pcChoice} beats ${playerChoice}`);
+        alert(`You lose! ${pcChoice} beats ${playerChoice}`);
         rounds++;
+        return(pcScore += 1);
     } else {
        console.log("Error, wrong input. You must pick rock or paper or scissors.");
+       alert("Error, wrong input. You must pick rock or paper or scissors.");
     }
 }
 
-console.log(compare(playerChoice,pcChoice))
+compare(playerChoice,pcChoice);
+console.log(playerScore);
+console.log(pcScore);
+console.log(rounds);
+
+}
+
+function gameWinner(playerScore, pcScore) {
+    if (playerScore > pcScore) {
+        alert(`Good job! You won the game!
+        The score was ${playerScore} - ${pcScore}.
+        Refresh the page to play again.`);
+    }   else if (playerScore < pcScore) {
+        alert(`Oh oh, you lost the game...
+        The score was ${playerScore} - ${pcScore}.
+        Refresh the page to play again.`);
+    } else {
+        alert(`Game's a tie! Score is ${playerScore} - ${pcScore}.
+        Refresh the page to play again.`);
+    }
+}
+
+gameWinner(playerScore, pcScore);
+
