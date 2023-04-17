@@ -1,0 +1,59 @@
+body {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.Score{
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    height: 200px;
+    
+    
+}
+
+div .P-Score, div .C-Score {
+ display: flex;
+ flex: auto;
+ flex-direction: column;
+ max-width: 475px;
+ min-width: fit-content;
+ font-size: 50px;
+ /*border: red dotted 5px;*/
+ 
+}
+
+div .P-Score {
+ 
+}
+
+div .C-Score {
+   
+}
+
+
+
+div .hyphen {
+    
+    font-size: 50px;
+}
+
+.Options {
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 200px;    
+}
+
+button {
+    height: 100px;
+    font-size: 50px;
+    min-width: 275px;
+}
+
+
+
