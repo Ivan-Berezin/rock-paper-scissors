@@ -22,42 +22,56 @@ UI Interactive Rock Paper Scicssors
 
 const buttons = document.querySelectorAll("button");
 
+const playerScoreDOM = document.querySelector("#P-Score-Num");
+let playerScore = ~~playerScoreDOM;
+console.log( ~~playerScoreDOM);
+console.log( playerScore);
+
+const pcScoreDOM = document.querySelector("#C-Score-Num");
+let pcScore = ~~pcScoreDOM;
+
+const roundsDOM = document.querySelector("#Round-Number");
+let rounds = ~~roundsDOM;
+
+const messageDOM = document.querySelector("#message");
+
+let whoWon = "";
+
 let playerChoice = "";
+let pcChoice = "";
 
-for (choice of buttons) {
-    choice.addEventListener('click', function(e) {
-        playerChoice = this.id;
-        getComputerChoice();
-        compare(playerChoice, pcChoice);
-        return;
-    })
-}
-
+const newGameButton = document.querySelector('#new-game-button');
+console.log(newGameButton);
 
 function compare(playerChoice, pcChoice) {
     if (playerChoice == "rock" && pcChoice == "Rock" || playerChoice == "paper" && pcChoice == "Paper" || playerChoice == "scissors" && pcChoice == "Scissors") { 
         console.log("It's a tie!");
-        alert("It's a tie!");
         rounds++;
+        roundsDOM.textContent = rounds;
+        whoWon = "tie";
+        message(whoWon);
     } else if (playerChoice == "rock" && pcChoice == "Scissors" || playerChoice == "paper" && pcChoice == "Rock" || playerChoice == "scissors" && pcChoice == "Paper") {
         console.log(`You win! ${playerChoice} beats ${pcChoice}`);
-        alert(`You win! ${playerChoice} beats ${pcChoice}`);
         rounds++;
-        return(playerScore += 1);
+        roundsDOM.textContent = rounds;
+        playerScore++
+        playerScoreDOM.textContent = playerScore;
+        whoWon = "player";
+        message(whoWon);
+        return;
+
     } else if (playerChoice == "rock" && pcChoice == "Paper" || playerChoice == "paper" && pcChoice == "Scissors" || playerChoice == "scissors" && pcChoice == "Rock") {
         console.log(`You lose! ${pcChoice} beats ${playerChoice}`);
-        alert(`You lose! ${pcChoice} beats ${playerChoice}`);
         rounds++;
-        return(pcScore += 1);
-    } else {
-       console.log("Error, wrong input. You must pick rock or paper or scissors.");
-       alert("Error, wrong input. You must pick rock or paper or scissors.");
+        roundsDOM.textContent = rounds;
+        pcScore++
+        pcScoreDOM.textContent = pcScore;
+        whoWon = "computer";
+        message(whoWon);
+        return;
     }
 }
 
-
-
-let pcChoice = "";
 function getComputerChoice() {
     let randNum = Math.floor(Math.random() * 3) + 1;
      if (randNum == 1) {
@@ -71,4 +85,74 @@ function getComputerChoice() {
     }    
 
     return(pcChoice);
+}
+
+function message(whoWon) {
+    if (whoWon == "tie") {
+        messageDOM.classList.remove("message");
+        messageDOM.classList.remove("message-win");
+        messageDOM.classList.remove("message-lose");
+        messageDOM.classList.add("message-tie");
+        messageDOM.textContent = "It's a tie!";
+    } else if (whoWon == "player") {
+        messageDOM.classList.remove("message");
+        messageDOM.classList.remove("message-tie");
+        messageDOM.classList.remove("message-lose");
+        messageDOM.classList.add("message-win");
+        messageDOM.textContent = `You win the round! ${playerChoice} beats ${pcChoice}`;
+    } else if (whoWon == "computer") {
+        messageDOM.classList.remove("message");
+        messageDOM.classList.remove("message-tie");
+        messageDOM.classList.remove("message-win");
+        messageDOM.classList.add("message-lose");
+        messageDOM.textContent = `You lose the round! ${pcChoice} beats ${playerChoice}`;
+    }
+}
+
+for (choice of buttons) {
+    choice.addEventListener('click', function(e) {
+        while (pcScore < 5 && playerScore < 5) {
+        playerChoice = this.id;
+        getComputerChoice();
+        compare(playerChoice, pcChoice);
+        gameWinner(playerScore, pcScore);
+        return;
+    }
+        return;
+    })
+}
+
+newGameButton.addEventListener('click', () => resetGame());
+
+function resetGame() {
+    rounds = 0;
+    roundsDOM.textContent = rounds;
+    playerScore = 0;
+    playerScoreDOM.textContent = playerScore;
+    pcScore = 0;
+    pcScoreDOM.textContent = pcScore;
+    newGameButton.classList.add('new-game-button');
+    messageDOM.classList.add('message');
+
+};
+
+
+
+function gameWinner(playerScore, pcScore) {
+    if (playerScore == 5) {
+        messageDOM.classList.remove("message");
+        messageDOM.classList.remove("message-tie");
+        messageDOM.classList.remove("message-lose");
+        messageDOM.classList.add("message-win");
+        messageDOM.textContent = `You win the game! First to 5! Press "New Game!" to play again`;
+        newGameButton.classList.remove("new-game-button");
+        
+    }   else if (pcScore == 5) {
+        messageDOM.classList.remove("message");
+        messageDOM.classList.remove("message-tie");
+        messageDOM.classList.remove("message-win");
+        messageDOM.classList.add("message-lose");
+        messageDOM.textContent = `You lose the game! Press "New Game!" to try again.`;
+        newGameButton.classList.remove("new-game-button");
+    }
 }
