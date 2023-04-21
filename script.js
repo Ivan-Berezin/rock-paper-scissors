@@ -78,6 +78,8 @@ let pcChoice = "";
 
 // Generate pc Choice
 
+
+
 let pcScore = 0
 let playerScore = 0
 let rounds = 0
@@ -104,7 +106,12 @@ console.log(getComputerChoice(randNum))
 
 console.log(pcChoice);
 
+
+
 //Generate Player Choice
+
+
+
 const playerChoice = prompt("Rock, Paper, or Scissors?:").toLowerCase()
 
 console.log(playerChoice);

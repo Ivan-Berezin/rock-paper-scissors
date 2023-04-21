@@ -3,10 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock, Paper, Scissors</title>
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="script2.js" defer></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <h1>HELLO WORLD!</h1>
-        <p>HOWDY</p>
+        <h1>ROCK, PAPER, SCISSORS</h1>
+        <h2>Let the best player win... First to five points wins!</h2>
+        <div class="Round">Round
+            <span id="Round-Number">0</span>
+        </div>
+        <div class="Score">
+            <div class="P-Score">Player Score
+                <span id="P-Score-Num">0</span>
+            </div>
+            <div class="hyphen">-</div>
+            <div class="C-Score">Computer Score
+                <span id="C-Score-Num">0</span>
+            </div>
+        </div>
+        <div class="new-game-div">
+            <button id="new-game-button" class="new-game-button">New Game!</button> 
+        </div>
+       <div class="Options">
+        <button id="rock">ROCK</button>
+        <button id="paper">PAPER</button>
+        <button id="scissors">SCISSORS</button>
+       </div>
+       <div class="message" id="message">You win!</div>
     </body>
 </html>
